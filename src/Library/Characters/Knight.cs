@@ -1,36 +1,27 @@
-using System.Collections.Generic;
 namespace RoleplayGame
 {
-    public class Knight: ICharacter
+    public class Knight : ICharacter
     {
         private int health = 100;
-
-        private List<IItem> items = new List<IItem>();
 
         public Knight(string name)
         {
             this.Name = name;
-            
-            this.AddItem(new Sword());
-            this.AddItem(new Armor());
-            this.AddItem(new Shield());
         }
 
         public string Name { get; set; }
-        
+
+        public Sword Sword { get; set; }
+
+        public Shield Shield { get; set; }
+
+        public Armor Armor { get; set; }
+
         public int AttackValue
         {
             get
             {
-                int value = 0;
-                foreach (IItem item in this.items)
-                {
-                    if (item is IAttackItem)
-                    {
-                        value += (item as IAttackItem).AttackValue;
-                    }
-                }
-                return value;
+                return Sword.AttackValue;
             }
         }
 
@@ -38,15 +29,7 @@ namespace RoleplayGame
         {
             get
             {
-                int value = 0;
-                foreach (IItem item in this.items)
-                {
-                    if (item is IDefenseItem)
-                    {
-                        value += (item as IDefenseItem).DefenseValue;
-                    }
-                }
-                return value;
+                return Armor.DefenseValue + Shield.DefenseValue;
             }
         }
 
@@ -73,16 +56,6 @@ namespace RoleplayGame
         public void Cure()
         {
             this.Health = 100;
-        }
-
-        public void AddItem(IItem item)
-        {
-            this.items.Add(item);
-        }
-
-        public void RemoveItem(IItem item)
-        {
-            this.items.Remove(item);
         }
     }
 }
