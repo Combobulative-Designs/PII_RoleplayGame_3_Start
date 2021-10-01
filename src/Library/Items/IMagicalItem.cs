@@ -1,7 +1,7 @@
 namespace RoleplayGame
 {
-    interface ISpell 
+    interface IMagicalItem
     {
-        
+
     }
 }

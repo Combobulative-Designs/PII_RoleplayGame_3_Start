@@ -1,6 +1,6 @@
 namespace RoleplayGame
 {
-    interface ISpell 
+    interface IItem 
     {
         
     }

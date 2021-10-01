@@ -1,6 +1,6 @@
 namespace RoleplayGame
 {
-    public class Staff : IAtaque , IDefensa , ISpell
+    public class Staff : IAttackItem , IDefenseItem 
     {
         public int AttackValue 
         {

@@ -4,6 +4,7 @@ namespace RoleplayGame
     
     {
         private int health = 100;
+        private int items;
 
         public Dwarf(string name)
         {
@@ -12,27 +13,9 @@ namespace RoleplayGame
 
         public string Name { get; set; }
 
-        public Axe Axe { get; set; }
+        public int AttackValue{get;set;}
 
-        public Shield Shield { get; set; }
-
-        public Helmet Helmet { get; set; }
-
-        public int AttackValue
-        {
-            get
-            {
-                return Axe.AttackValue;
-            }
-        }
-
-        public int DefenseValue
-        {
-            get
-            {
-                return Shield.DefenseValue + Helmet.DefenseValue;
-            }
-        }
+        public int DefenseValue{get;set;}
 
         public int Health
         {
@@ -57,6 +40,16 @@ namespace RoleplayGame
         public void Cure()
         {
             this.Health = 100;
+        }
+
+        public void AddItem(IItem item)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void RemoveItem(IItem item)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
