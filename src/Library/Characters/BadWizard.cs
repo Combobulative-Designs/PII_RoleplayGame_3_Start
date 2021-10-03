@@ -5,7 +5,7 @@ namespace RoleplayGame
     public class BadWizard : BadGuy, IMagicCharacter
     {
         
-        private List<IMagicalItem> magicalItems;
+        private List<IMagicalItem> magicalItems = new List<IMagicalItem>();
 
         public BadWizard(string name)
         {
@@ -25,7 +25,7 @@ namespace RoleplayGame
         public override int AttackValue {
             get {
                 int result = 0;
-                foreach (IItem item in this.items)
+                foreach (IItem item in this.Items)
                 {
                     if (item is IAttackItem)
                     {
@@ -47,7 +47,7 @@ namespace RoleplayGame
         public override int DefenseValue {
             get {
                 int result = 0;
-                foreach (IItem item in this.items)
+                foreach (IItem item in this.Items)
                 {
                     if (item is IDefenseItem)
                     {
