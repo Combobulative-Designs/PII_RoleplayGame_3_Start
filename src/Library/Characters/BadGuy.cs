@@ -60,15 +60,15 @@ namespace RoleplayGame
             this.Health = 100;
         }
 
-        public void ReceiveAttack(Hero hero)
+        public void ReceiveAttack(ICharacter character)
         {
-            if (this.DefenseValue < hero.AttackValue)
+            if (this.DefenseValue < character.AttackValue)
             {
-                this.Health -= hero.AttackValue - this.DefenseValue;
+                this.Health -= character.AttackValue - this.DefenseValue;
             }
-            if (this.Health==0)
+            if (this.Health==0 && character is Hero)
             {
-                hero.VP +=  this.VP;
+                character.VP +=  this.VP;
                 this.VP=0;
             }
         }
@@ -83,7 +83,7 @@ namespace RoleplayGame
             {
                 return this.vp;
             }
-            private set 
+            set 
             {
                 this.vp = value < 0 ? 0 : value;
             }
