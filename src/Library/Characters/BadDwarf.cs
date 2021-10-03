@@ -2,10 +2,10 @@ using System.Collections.Generic;
 
 namespace RoleplayGame
 {
-    public class BadArcher : BadGuy
+    public class BadDwarf : BadGuy
     {
 
-        public BadArcher (string name)
+        public BadDwarf (string name)
         {
             this.Name = name;
         }
