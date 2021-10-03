@@ -76,17 +76,19 @@ namespace Test.Library
         public void TestReceiveDamage()
         {
             Bow bow = new Bow();
+            Sword sword = new Sword();
             Helmet helmet = new Helmet();
 
             Archer legoland = new Archer("Legoland");
             legoland.AddItem(bow);
+            legoland.AddItem(sword);
 
             Archer legolas = new Archer("Legolas");
             legolas.AddItem(helmet);
 
             legolas.ReceiveAttack(legoland);
 
-            int expected = 100 - (bow.AttackValue - legolas.DefenseValue);
+            int expected = 100 - (legoland.AttackValue - legolas.DefenseValue);
             Assert.AreEqual(expected, legolas.Health);
         }
 
