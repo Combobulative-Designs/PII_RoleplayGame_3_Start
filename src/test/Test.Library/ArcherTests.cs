@@ -35,10 +35,14 @@ namespace Test.Library
         public void TestDefenseValue()
         {
             Helmet helmet = new Helmet();
-            Archer legolas = new Archer("Legolas");
-            legolas.Helmet = helmet;
+            Armor armor = new Armor();
+            int expectedDefense = armor.DefenseValue + helmet.DefenseValue;
 
-            Assert.AreEqual(helmet.DefenseValue, legolas.DefenseValue);
+            Archer legolas = new Archer("Legolas");
+            legolas.AddItem(armor);
+            legolas.AddItem(helmet);
+
+            Assert.AreEqual(expectedDefense, legolas.DefenseValue);
         }
 
         /// <summary>
@@ -51,10 +55,14 @@ namespace Test.Library
         public void TestAttackValue()
         {
             Bow bow = new Bow(); 
-            Archer legolas = new Archer("Legolas");
-            legolas.Bow = bow;
+            Sword sword = new Sword(); 
+            int expectedAttack = bow.AttackValue + sword.AttackValue;
 
-            Assert.AreEqual(bow.AttackValue, legolas.AttackValue);
+            Archer legolas = new Archer("Legolas");
+            legolas.AddItem(bow);
+            legolas.AddItem(sword); 
+
+            Assert.AreEqual(expectedAttack, legolas.AttackValue);
         }
 
         /// <summary>
@@ -67,15 +75,42 @@ namespace Test.Library
         [Test]
         public void TestReceiveDamage()
         {
-
+            Bow bow = new Bow();
             Helmet helmet = new Helmet();
+
+            Archer legoland = new Archer("Legoland");
+            legoland.AddItem(bow);
+
             Archer legolas = new Archer("Legolas");
-            legolas.Helmet = helmet;
+            legolas.AddItem(helmet);
 
-            legolas.ReceiveAttack(64);
+            legolas.ReceiveAttack(legoland);
 
-            int expected = 100 - (64 - legolas.DefenseValue);
+            int expected = 100 - (bow.AttackValue - legolas.DefenseValue);
             Assert.AreEqual(expected, legolas.Health);
+        }
+
+        /// <summary>
+        /// Test de ganar VP. Verifica que
+        /// los VPs de un malo se transfieran
+        /// al arquero luego de que este lo
+        /// derrote.
+        /// </summary>
+        [Test]
+        public void TestGainVP()
+        {
+            BadWizard saruman = new BadWizard("Saruman");
+            
+            Bow bow = new Bow();
+            Archer legolas = new Archer("Legolas");
+            legolas.AddItem(bow);
+
+            int expectedVP = legolas.VP + saruman.VP;
+            while (saruman.Health > 0)
+            {
+                saruman.ReceiveAttack(legolas);
+            }
+            Assert.AreEqual(expectedVP, legolas.VP);
         }
     }
 }
