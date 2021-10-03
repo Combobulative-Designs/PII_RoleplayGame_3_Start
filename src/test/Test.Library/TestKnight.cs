@@ -5,59 +5,114 @@ using RoleplayGame;
 
 namespace Test.Library
 {
-    public class TestsKnight
+    public class TestKnight
     {
-        [Test]
-        public void Test1AtacadoArquero()
+        [SetUp]
+        public void Setup()
         {
-            int vida = 100;
-            string Nombre = "Elenor";
-            Knight prueba1 = new Knight(Nombre);
-            Archer arquer1 = new Archer("arquero1");
-            arquer1.Bow = new Bow();
-            prueba1.Shield = new Shield();
-            prueba1.Armor = new Armor();
-            prueba1.ReceiveAttack(arquer1.AttackValue);
-
-            Assert.AreEqual(vida,prueba1.Health);
-
         }
 
+        /// <summary>
+        /// Test para el caso de crear un Arquero.
+        /// Verifica que el Arquero creado tenga
+        /// el nombre correcto y la vida completa.
+        /// </summary>
         [Test]
-        public void Test2Atacado()
+        public void TestCreateKnight()
         {
-            int vida = 99;
-            string Nombre = "Elenor";
-            Knight prueba1 = new Knight(Nombre);
-    
-            prueba1.Shield = new Shield();
-            prueba1.Armor = new Armor();
-            prueba1.ReceiveAttack(40);
-            Assert.AreEqual(vida,prueba1.Health);
+            string name = "Nicolas";
+            Knight legolas = new Knight(name);
 
-
+            Assert.AreEqual(name, legolas.Name);
+            Assert.AreEqual(100, legolas.Health);
         }
 
-
+        /// <summary>
+        /// Test de calculo de valor defensa.
+        /// Verifica que la defensa calculada
+        /// sea la correcta para los items
+        /// equipados.
+        /// </summary>
         [Test]
-        public void Test2curado()
+        public void TestDefenseValue()
         {
-            int vida = 100;
-            string Nombre = "Elenor";
-            Knight prueba1 = new Knight(Nombre);
-    
-            prueba1.Shield = new Shield();
-            prueba1.Armor = new Armor();
-            prueba1.ReceiveAttack(50);
-        
+            Helmet helmet = new Helmet();
+            Armor armor = new Armor();
+            int expectedDefense = armor.DefenseValue + helmet.DefenseValue;
 
-            prueba1.Cure();
-            Assert.AreEqual(vida,prueba1.Health);
+            Knight xKnight = new Knight("Nicolas");
+            xKnight.AddItem(armor);
+            xKnight.AddItem(helmet);
 
-
+            Assert.AreEqual(expectedDefense, xKnight.DefenseValue);
         }
 
+        /// <summary>
+        /// Test de calculo de valor ataque.
+        /// Verifica que el ataque calculado
+        /// sea el correcta para los items
+        /// equipados.
+        /// </summary>
+        [Test]
+        public void TestAttackValue()
+        {
+            Bow bow = new Bow(); 
+            Sword sword = new Sword(); 
+            int expectedAttack = bow.AttackValue + sword.AttackValue;
 
+            Knight xKnight = new Knight("Nicolas");
+            xKnight.AddItem(bow);
+            xKnight.AddItem(sword); 
 
+            Assert.AreEqual(expectedAttack, xKnight.AttackValue);
+        }
+
+        /// <summary>
+        /// Test de recibir daño. Verifica
+        /// que la vida restante luego de 
+        /// recibir un ataque sea la correcta
+        /// para la combinacion de vida inicial
+        /// daño recibido, y valor de defensa.
+        /// </summary>
+        [Test]
+        public void TestReceiveDamage()
+        {
+            Bow bow = new Bow();
+            Helmet helmet = new Helmet();
+
+            Knight xKnight = new Knight("Nicolas");
+            xKnight.AddItem(bow);
+
+            Knight legolas = new Knight("Legolas");
+            legolas.AddItem(helmet);
+
+            legolas.ReceiveAttack(xKnight);
+
+            int expected = 100 - (bow.AttackValue - legolas.DefenseValue);
+            Assert.AreEqual(expected, legolas.Health);
+        }
+
+        /// <summary>
+        /// Test de ganar VP. Verifica que
+        /// los VPs de un malo se transfieran
+        /// al arquero luego de que este lo
+        /// derrote.
+        /// </summary>
+        [Test]
+        public void TestGainVP()
+        {
+            BadWizard xMalo = new BadWizard("ReMalo");
+            
+            Bow bow = new Bow();
+            Knight xKnight = new Knight("Nico");
+            xKnight.AddItem(bow);
+
+            int expectedVP = xKnight.VP + xMalo.VP;
+            while (xMalo.Health > 0)
+            {
+                xMalo.ReceiveAttack(xKnight);
+            }
+            Assert.AreEqual(expectedVP, xKnight.VP);
+        }
     }
 }
