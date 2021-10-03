@@ -93,6 +93,30 @@ namespace Test.Library
         }
 
         /// <summary>
+        /// Test de curarse. Revisa que la vida
+        /// del personaje se recupere correctamente
+        /// al correr el metodo Cure().
+        /// </summary>
+        [Test]
+        public void TestCure()
+        {
+            Bow bow = new Bow();
+            Sword sword = new Sword();
+            Helmet helmet = new Helmet();
+
+            Archer legoland = new Archer("Legoland");
+            legoland.AddItem(bow);
+            legoland.AddItem(sword);
+
+            Archer legolas = new Archer("Legolas");
+            legolas.AddItem(helmet);
+
+            legolas.ReceiveAttack(legoland);
+            legolas.Cure();
+            Assert.AreEqual(100, legolas.Health);
+        }
+
+        /// <summary>
         /// Test de ganar VP. Verifica que
         /// los VPs de un malo se transfieran
         /// al arquero luego de que este lo

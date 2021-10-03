@@ -91,5 +91,29 @@ namespace Test.Library
             int expected = 100 - (lichKing.AttackValue - arthas.DefenseValue);
             Assert.AreEqual(expected, arthas.Health);
         }
+
+        /// <summary>
+        /// Test de curarse. Revisa que la vida
+        /// del personaje se recupere correctamente
+        /// al correr el metodo Cure().
+        /// </summary>
+        [Test]
+        public void TestCure()
+        {
+            Bow bow = new Bow();
+            Sword sword = new Sword();
+            Helmet helmet = new Helmet();
+
+            DeathKnight lichKing = new DeathKnight("Lich King");
+            lichKing.AddItem(bow);
+            lichKing.AddItem(sword);
+
+            DeathKnight arthas = new DeathKnight("Arthas Menethil");
+            arthas.AddItem(helmet);
+
+            arthas.ReceiveAttack(lichKing);
+            arthas.Cure();
+            Assert.AreEqual(100, arthas.Health);
+        }
     }
 }
