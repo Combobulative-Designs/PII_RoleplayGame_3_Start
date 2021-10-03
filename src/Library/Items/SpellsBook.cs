@@ -4,7 +4,8 @@ namespace RoleplayGame
 {
     public class SpellsBook : IMagicalAttackItem,IMagicalDefenseItem
     {
-        public List<ISpell> Spells { get; set; }
+        private List<ISpell> spells = new List<ISpell>();
+        public List<ISpell> Spells { get => spells; }
         
         public int AttackValue
         {
@@ -34,12 +35,12 @@ namespace RoleplayGame
 
         public void AddSpell(ISpell spell)
         {
-            this.Spells.Add(spell);
+            this.spells.Add(spell);
         }
 
         public void RemoveSPell(ISpell spell)
         {
-            this.Spells.RemoveAll(value => value == spell);
+            this.spells.RemoveAll(value => value == spell);
         }
     }
 }
