@@ -2,14 +2,14 @@ using System.Collections.Generic;
 
 namespace RoleplayGame
 {
-    public class Wizard : BadGuy, IMagicCharacter
+    public class BadWizard : BadGuy, IMagicCharacter
     {
         
         private List<IMagicalItem> magicalItems;
 
         public BadWizard(string name)
         {
-            this.Name = name
+            this.Name = name;
         }
 
         public void AddItem(IMagicalItem item)
