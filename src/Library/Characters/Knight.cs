@@ -1,8 +1,11 @@
+using System.Collections.Generic;
+
 namespace RoleplayGame
 {
     public class Knight : ICharacter
     {
         private int health = 100;
+        private List<IItem> items;
 
         public Knight(string name)
         {
@@ -10,28 +13,9 @@ namespace RoleplayGame
         }
 
         public string Name { get; set; }
+        public int AttackValue{get;set;}
 
-        public Sword Sword { get; set; }
-
-        public Shield Shield { get; set; }
-
-        public Armor Armor { get; set; }
-
-        public int AttackValue
-        {
-            get
-            {
-                return Sword.AttackValue;
-            }
-        }
-
-        public int DefenseValue
-        {
-            get
-            {
-                return Armor.DefenseValue + Shield.DefenseValue;
-            }
-        }
+        public int DefenseValue{get;set;}
 
         public int Health
         {
@@ -56,6 +40,16 @@ namespace RoleplayGame
         public void Cure()
         {
             this.Health = 100;
+        }
+
+        public void AddItem(IItem item)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void RemoveItem(IItem item)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

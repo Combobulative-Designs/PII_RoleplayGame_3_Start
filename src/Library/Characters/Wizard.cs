@@ -1,8 +1,12 @@
+using System.Collections.Generic;
+
 namespace RoleplayGame
 {
-    public class Wizard : ICharacter
+    public class Wizard : IMagicCharacter 
     {
         private int health = 100;
+        private List<IItem> items;
+        private List<IMagicalItem> magicalItems;
 
         public Wizard(string name)
         {
@@ -11,25 +15,9 @@ namespace RoleplayGame
 
         public string Name { get; set; }
 
-        public SpellsBook SpellsBook { get; set; }
 
-        public Staff Staff { get; set; }
-
-        public int AttackValue
-        {
-            get
-            {
-                return SpellsBook.AttackValue + Staff.AttackValue;
-            }
-        }
-
-        public int DefenseValue
-        {
-            get
-            {
-                return SpellsBook.DefenseValue + Staff.DefenseValue;
-            }
-        }
+        public int AttackValue{get;set;}
+        public int DefenseValue{get;set;}
 
         public int Health
         {
@@ -54,6 +42,36 @@ namespace RoleplayGame
         public void Cure()
         {
             this.Health = 100;
+        }
+
+        public void AddSpell(ISpell spell)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void RemoveSpell(ISpell spell)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void AddItem(IMagicalItem item)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void RemoveItem(IMagicalItem item)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void AddItem(IItem item)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void RemoveItem(IItem item)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

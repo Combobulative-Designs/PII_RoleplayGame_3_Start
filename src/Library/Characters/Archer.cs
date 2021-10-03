@@ -1,36 +1,21 @@
+using System.Collections.Generic;
+
 namespace RoleplayGame
 {
     public class Archer : ICharacter
     {
         private int health = 100;
-
+        private List<IItem> items;
         public Archer(string name)
         {
             this.Name = name;
         }
 
         public string Name { get; set; }
+        public int AttackValue{get; set;}
+
+        public int DefenseValue{get; set;}
         
-        public Bow Bow { get; set; }
-
-        public Helmet Helmet { get; set; }
-
-        public int AttackValue
-        {
-            get
-            {
-                return Bow.AttackValue;
-            }
-        }
-
-        public int DefenseValue
-        {
-            get
-            {
-                return Helmet.DefenseValue;
-            }
-        }
-
         public int Health
         {
             get
@@ -54,6 +39,16 @@ namespace RoleplayGame
         public void Cure()
         {
             this.Health = 100;
+        }
+
+        public void AddItem(IItem item)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void RemoveItem(IItem item)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
