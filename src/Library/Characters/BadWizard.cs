@@ -1,0 +1,70 @@
+using System.Collections.Generic;
+
+namespace RoleplayGame
+{
+    public class Wizard : BadGuy, IMagicCharacter
+    {
+        
+        private List<IMagicalItem> magicalItems;
+
+        public BadWizard(string name)
+        {
+            this.Name = name
+        }
+
+        public void AddItem(IMagicalItem item)
+        {
+            this.magicalItems.Add(item);
+        }
+
+        public void RemoveItem(IMagicalItem item)
+        {
+            this.magicalItems.Remove(item);
+        }
+
+        public override int AttackValue {
+            get {
+                int result = 0;
+                foreach (IItem item in this.items)
+                {
+                    if (item is IAttackItem)
+                    {
+                        result += ((IAttackItem)item).AttackValue;
+                    }
+                }
+                foreach (IMagicalItem item in this.magicalItems)
+                {
+                    if (item is IMagicalAttackItem)
+                    {
+                        result += ((IMagicalAttackItem)item).AttackValue;
+                    }
+                }
+
+                return result;
+            }
+        }
+
+        public override int DefenseValue {
+            get {
+                int result = 0;
+                foreach (IItem item in this.items)
+                {
+                    if (item is IDefenseItem)
+                    {
+                        result += ((IDefenseItem)item).DefenseValue;
+                    }
+                }
+                foreach (IMagicalItem item in this.magicalItems)
+                {
+                    if (item is IMagicalDefenseItem)
+                    {
+                        result += ((IMagicalDefenseItem)item).DefenseValue;
+                    }
+                }
+                return result;
+            }
+        }
+
+        
+    }
+}
