@@ -2,9 +2,9 @@ using System.Collections.Generic;
 
 namespace RoleplayGame
 {
-    public abstract class Hero : ICharacter
+    public abstract class BadGuy : ICharacter
     {
-        protected int vp = 0;
+        protected int vp = 100;
         protected int health = 100;
         protected List<IItem> items = new List<IItem>();
 
@@ -60,11 +60,16 @@ namespace RoleplayGame
             this.Health = 100;
         }
 
-        public void ReceiveAttack(int power)
+        public void ReceiveAttack(Hero hero)
         {
-            if (this.DefenseValue < power)
+            if (this.DefenseValue < hero.AttackValue)
             {
-                this.Health -= power - this.DefenseValue;
+                this.Health -= hero.AttackValue - this.DefenseValue;
+            }
+            if (this.Health==0)
+            {
+                hero.VP +=  this.VP;
+                this.VP=0;
             }
         }
 
@@ -84,7 +89,5 @@ namespace RoleplayGame
             }
 
         }
-
     }
-    
 }
