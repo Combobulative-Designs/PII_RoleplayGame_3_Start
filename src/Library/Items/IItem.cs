@@ -1,6 +1,6 @@
 namespace RoleplayGame
 {
-    interface IItem 
+    public interface IItem 
     {
         
     }

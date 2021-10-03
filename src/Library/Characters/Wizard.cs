@@ -1,10 +1,12 @@
+using System.Collections.Generic;
+
 namespace RoleplayGame
 {
     public class Wizard : IMagicCharacter 
     {
         private int health = 100;
-        private int items;
-        private IMagicalItem MagicalItems;
+        private List<IItem> items;
+        private List<IMagicalItem> magicalItems;
 
         public Wizard(string name)
         {

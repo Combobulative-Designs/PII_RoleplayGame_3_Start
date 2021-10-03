@@ -1,9 +1,11 @@
+using System.Collections.Generic;
+
 namespace RoleplayGame
 {
     public class Knight : ICharacter
     {
         private int health = 100;
-        private int items;
+        private List<IItem> items;
 
         public Knight(string name)
         {

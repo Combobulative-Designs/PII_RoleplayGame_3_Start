@@ -1,6 +1,6 @@
 namespace RoleplayGame
 {
-    interface IMagicCharacter : ICharacter
+    public interface IMagicCharacter : ICharacter
     {
         void AddSpell(ISpell spell);
         void RemoveSpell(ISpell spell);

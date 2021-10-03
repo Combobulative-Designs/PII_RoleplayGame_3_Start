@@ -1,9 +1,11 @@
+using System.Collections.Generic;
+
 namespace RoleplayGame
 {
     public class Archer : ICharacter
     {
         private int health = 100;
-        private int items;
+        private List<IItem> items;
         public Archer(string name)
         {
             this.Name = name;

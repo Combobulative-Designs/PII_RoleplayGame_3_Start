@@ -1,6 +1,6 @@
 namespace RoleplayGame
 {
-    public class Spell : ISpell
+    public class SpellOne : ISpell
     {
         public int AttackValue
         {

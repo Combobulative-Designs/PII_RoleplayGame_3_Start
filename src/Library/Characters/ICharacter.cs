@@ -1,6 +1,6 @@
 namespace RoleplayGame
 {
-    interface ICharacter
+    public interface ICharacter
     {
         string Name { get; set; }
         int AttackValue { get; }

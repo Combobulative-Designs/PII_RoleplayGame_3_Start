@@ -1,6 +1,6 @@
 namespace RoleplayGame
 {
-    interface IMagicalItem
+    public interface IMagicalItem
     {
 
     }
