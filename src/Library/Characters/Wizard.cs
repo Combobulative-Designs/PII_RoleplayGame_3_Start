@@ -2,10 +2,9 @@ using System.Collections.Generic;
 
 namespace RoleplayGame
 {
-    public class Wizard : IMagicCharacter 
+    public class Wizard : Hero, IMagicCharacter
     {
-        private int health = 100;
-        private List<IItem> items;
+        
         private List<IMagicalItem> magicalItems;
 
         public Wizard(string name)
@@ -13,65 +12,59 @@ namespace RoleplayGame
             this.Name = name;
         }
 
-        public string Name { get; set; }
-
-
-        public int AttackValue{get;set;}
-        public int DefenseValue{get;set;}
-
-        public int Health
-        {
-            get
-            {
-                return this.health;
-            }
-            private set
-            {
-                this.health = value < 0 ? 0 : value;
-            }
-        }
-
-        public void ReceiveAttack(int power)
-        {
-            if (this.DefenseValue < power)
-            {
-                this.Health -= power - this.DefenseValue;
-            }
-        }
-
-        public void Cure()
-        {
-            this.Health = 100;
-        }
-
-        public void AddSpell(ISpell spell)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void RemoveSpell(ISpell spell)
-        {
-            throw new System.NotImplementedException();
-        }
-
         public void AddItem(IMagicalItem item)
         {
-            throw new System.NotImplementedException();
+            this.magicalItems.Add(item);
         }
 
         public void RemoveItem(IMagicalItem item)
         {
-            throw new System.NotImplementedException();
+            this.magicalItems.Remove(item);
         }
 
-        public void AddItem(IItem item)
-        {
-            throw new System.NotImplementedException();
+        public override int AttackValue {
+            get {
+                int result = 0;
+                foreach (IItem item in this.items)
+                {
+                    if (item is IAttackItem)
+                    {
+                        result += ((IAttackItem)item).AttackValue;
+                    }
+                }
+                foreach (IMagicalItem item in this.magicalItems)
+                {
+                    if (item is IMagicalAttackItem)
+                    {
+                        result += ((IMagicalAttackItem)item).AttackValue;
+                    }
+                }
+
+                return result;
+            }
         }
 
-        public void RemoveItem(IItem item)
-        {
-            throw new System.NotImplementedException();
+        public override int DefenseValue {
+            get {
+                int result = 0;
+                foreach (IItem item in this.items)
+                {
+                    if (item is IDefenseItem)
+                    {
+                        result += ((IDefenseItem)item).DefenseValue;
+                    }
+                }
+                foreach (IMagicalItem item in this.magicalItems)
+                {
+                    if (item is IMagicalDefenseItem)
+                    {
+                        result += ((IMagicalDefenseItem)item).DefenseValue;
+                    }
+                }
+                return result;
+            }
         }
+
+        
     }
 }

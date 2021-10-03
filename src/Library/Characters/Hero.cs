@@ -4,8 +4,8 @@ namespace RoleplayGame
 {
     public abstract class Hero : ICharacter
     {
-        private int health = 100;
-        private List<IItem> items = new List<IItem>();
+        protected int health = 100;
+        protected List<IItem> items = new List<IItem>();
 
         public string Name { get ; set; }
 
