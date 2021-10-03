@@ -5,7 +5,7 @@ namespace RoleplayGame
     public class BadArcher : BadGuy
     {
 
-        public BadArcher(string name)
+        public BadArcher (string name)
         {
             this.Name = name;
         }
