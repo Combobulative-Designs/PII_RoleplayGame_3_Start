@@ -6,11 +6,11 @@ namespace RoleplayGame
         int AttackValue { get; }
         int DefenseValue { get; }
         int Health { get; }
-        int VP {get;}
+        int VP {get; set;}
 
         void AddItem(IItem item);
         void RemoveItem(IItem item);
-        void ReceiveAttack(int power); 
+        void ReceiveAttack(ICharacter character); 
         void Cure();
         
     }
