@@ -18,7 +18,7 @@ namespace Test.Library
 
             Assert.AreEqual(vNombre, elmago.Name);
             
-        }/*
+        }
         [Test]
         public void TestReceiveAttack()
         {
@@ -55,7 +55,7 @@ namespace Test.Library
             Assert.AreEqual(Vidainicial, elmago.Health);
 
             
-        }*/
+        }
         
 
     }
