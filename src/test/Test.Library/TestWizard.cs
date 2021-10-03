@@ -22,39 +22,66 @@ namespace Test.Library
         [Test]
         public void TestReceiveAttack()
         {
-            SpellsBook book = new SpellsBook();
-            book.Spells = new Spell[]{ new Spell() };
-            int Vidafinal=90;
-            string vNombre = "Mago De Prueba";
-            Wizard elmago = new Wizard(vNombre );
-            elmago.Staff = new Staff();
-            elmago.SpellsBook = book;
+            Bow bow = new Bow();
+            SpellOne spell = new SpellOne();
+            SpellsBook book= new SpellsBook();
+            
 
-            elmago.ReceiveAttack(180);
+            Archer legoland = new Archer("Legoland");
+            legoland.AddItem(bow);
 
-            Assert.AreEqual(Vidafinal, elmago.Health);
+            Wizard mago = new Wizard("Mago");
+            mago.AddItem(book);
+
+            mago.ReceiveAttack(legoland);
+
+            int expected = 100 - (bow.AttackValue - mago.DefenseValue);
+            Assert.AreEqual(expected, mago.Health);
             
         }
                 [Test]
         public void Testheall()
         {
             int Vidainicial=100;
-            SpellsBook book = new SpellsBook();
-            book.Spells = new Spell[]{ new Spell() };
-            int Vidafinal=90;
-            string vNombre = "Mago De Prueba";
-            Wizard elmago = new Wizard(vNombre );
-            elmago.Staff = new Staff();
-            elmago.SpellsBook = book;
+            Bow bow = new Bow();
+            SpellOne spell = new SpellOne();
+            SpellsBook book= new SpellsBook();
+            book.AddSpell(spell);
+            
 
-            elmago.ReceiveAttack(180);
+            Archer legoland = new Archer("Legoland");
+            legoland.AddItem(bow);
 
-            Assert.AreEqual(Vidafinal, elmago.Health);
+            Wizard mago = new Wizard("Mago");
+            mago.AddItem(book);
 
-            elmago.Cure();
-            Assert.AreEqual(Vidainicial, elmago.Health);
+            mago.ReceiveAttack(legoland);
+
+            int expected = 100 - (bow.AttackValue - mago.DefenseValue);
+            
+
+            mago.Cure();
+            Assert.AreEqual(Vidainicial, mago.Health);
 
             
+        }
+        [Test]        
+        public void TestGainVP()
+        {
+            BadWizard saruman = new BadWizard("Saruman");
+            
+            SpellOne spell = new SpellOne();
+            SpellsBook book= new SpellsBook();
+            book.AddSpell(spell);
+            Wizard mago = new Wizard("Mago");
+            mago.AddItem(book);
+
+            int expectedVP = mago.VP + saruman.VP;
+            while (saruman.Health > 0)
+            {
+                saruman.ReceiveAttack(mago);
+            }
+            Assert.AreEqual(expectedVP, mago.VP);
         }
         
 
