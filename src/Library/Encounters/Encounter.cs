@@ -38,14 +38,14 @@ namespace RoleplayGame
                 if (this.heroes.Count > 0)
                 {
                     this.heroes[index].ReceiveAttack(badGuy);
+                    if (this.heroes[index].Health == 0)
+                    {
+                        this.heroes.RemoveAt(index);
+                    }
                     index += 1;
                     if (index >= this.heroes.Count)
                     {
                         index = 0;
-                    }
-                    if (this.heroes[index].Health == 0)
-                    {
-                        this.heroes.RemoveAt(index);
                     }
                 }
             }
@@ -68,14 +68,14 @@ namespace RoleplayGame
                 if (this.badGuys.Count > 0)
                 {
                     this.badGuys[index].ReceiveAttack(hero);
+                    if (this.badGuys[index].Health == 0)
+                    {
+                        this.badGuys.RemoveAt(index);
+                    }
                     index += 1;
                     if (index >= this.badGuys.Count)
                     {
                         index = 0;
-                    }
-                    if (this.badGuys[index].Health == 0)
-                    {
-                        this.badGuys.RemoveAt(index);
                     }
                     if (hero.VP >= 5)
                     {
