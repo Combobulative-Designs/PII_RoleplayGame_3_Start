@@ -79,19 +79,40 @@ namespace Test.Library
         {
             Bow bow = new Bow();
             Helmet helmet = new Helmet();
+            Sword sword=new Sword();
+            
 
             Knight xKnight = new Knight("Nicolas");
             xKnight.AddItem(bow);
+            xKnight.AddItem(sword);
 
             Knight legolas = new Knight("Legolas");
             legolas.AddItem(helmet);
 
             legolas.ReceiveAttack(xKnight);
 
-            int expected = 100 - (bow.AttackValue - legolas.DefenseValue);
+            int expected = 100 - (xKnight.AttackValue - legolas.DefenseValue);
             Assert.AreEqual(expected, legolas.Health);
         }
 
+        [Test]
+        public void TestCure()
+        {
+            Bow bow = new Bow();
+            Sword sword = new Sword();
+            Helmet helmet = new Helmet();
+
+            Knight xKnight1 = new Knight("Nico");
+            xKnight1.AddItem(bow);
+            xKnight1.AddItem(sword);
+
+            Knight xKnight2 = new Knight("Pedro");
+            xKnight2.AddItem(helmet);
+
+            xKnight2.ReceiveAttack(xKnight1);
+            xKnight2.Cure();
+            Assert.AreEqual(100, xKnight2.Health);
+        }
         /// <summary>
         /// Test de ganar VP. Verifica que
         /// los VPs de un malo se transfieran
