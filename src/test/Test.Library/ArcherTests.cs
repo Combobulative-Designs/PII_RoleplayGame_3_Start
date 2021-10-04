@@ -76,18 +76,44 @@ namespace Test.Library
         public void TestReceiveDamage()
         {
             Bow bow = new Bow();
+            Sword sword = new Sword();
             Helmet helmet = new Helmet();
 
             Archer legoland = new Archer("Legoland");
             legoland.AddItem(bow);
+            legoland.AddItem(sword);
 
             Archer legolas = new Archer("Legolas");
             legolas.AddItem(helmet);
 
             legolas.ReceiveAttack(legoland);
 
-            int expected = 100 - (bow.AttackValue - legolas.DefenseValue);
+            int expected = 100 - (legoland.AttackValue - legolas.DefenseValue);
             Assert.AreEqual(expected, legolas.Health);
+        }
+
+        /// <summary>
+        /// Test de curarse. Revisa que la vida
+        /// del personaje se recupere correctamente
+        /// al correr el metodo Cure().
+        /// </summary>
+        [Test]
+        public void TestCure()
+        {
+            Bow bow = new Bow();
+            Sword sword = new Sword();
+            Helmet helmet = new Helmet();
+
+            Archer legoland = new Archer("Legoland");
+            legoland.AddItem(bow);
+            legoland.AddItem(sword);
+
+            Archer legolas = new Archer("Legolas");
+            legolas.AddItem(helmet);
+
+            legolas.ReceiveAttack(legoland);
+            legolas.Cure();
+            Assert.AreEqual(100, legolas.Health);
         }
 
         /// <summary>
