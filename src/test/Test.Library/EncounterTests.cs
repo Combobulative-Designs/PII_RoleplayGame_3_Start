@@ -4,7 +4,6 @@ using RoleplayGame;
 
 namespace Test.Library
 {
-    [SetCulture("en-US")]
     public class EncounterTests
     {
         [SetUp]
@@ -42,7 +41,7 @@ namespace Test.Library
             using (StringWriter stringWriter = new StringWriter())
             {
                 System.Console.SetOut(stringWriter);
-                string expected = "Ganaron los malos.\n";
+                string expected = "Ganaron los malos.\r\n";
                 encounter.DoEncounter();
                 Assert.That(stringWriter.ToString(), Is.EqualTo(expected));
             }
@@ -79,7 +78,7 @@ namespace Test.Library
             using (StringWriter stringWriter = new StringWriter())
             {
                 System.Console.SetOut(stringWriter);
-                string expected = "Ganaron los heroes.\n";
+                string expected = "Ganaron los heroes.\r\n";
                 encounter.DoEncounter();
                 Assert.That(stringWriter.ToString(), Is.EqualTo(expected));
             }
